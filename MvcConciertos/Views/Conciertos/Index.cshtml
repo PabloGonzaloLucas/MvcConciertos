@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MvcConciertos.Models.Evento>
+
+@{
+    ViewData["Title"] = "Index";
+    List<CategoriaEvento> categorias = ViewBag.Categorias as List<CategoriaEvento>;
+}
+
+<h1>Index</h1>
+
+<ul>
+    @foreach (var categoria in categorias)
+    {
+        <li>
+            <a asp-action="Index" asp-controller="Conciertos" asp-route-idCategoria=@categoria.IdCategoria>@categoria.Nombre</a>
+        </li>
+    }
+</ul>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEvento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Artista)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCategoria)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEvento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artista)
+            </td>
+            <td>
+                <img src="https://s3-examen-pgl.s3.us-east-1.amazonaws.com/@item.Imagen" style="width:100px; height:100px;" 
+                    />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCategoria)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
